@@ -9,7 +9,6 @@ export const personalData = {
   title: "Aspiring Software Developer | Full Stack Developer",
   tagline: "I enjoy building meaningful digital experiences and developing practical software solutions.",
   email: "khushitiwari69120@gmail.com",
-  phone: "+91-8957756901",
   location: "India",
   github: "https://github.com/TheKT-Github",
   linkedin: "https://linkedin.com/in/khushi-tiwari-908505280",
@@ -138,12 +137,13 @@ export const projectsData = [
     ],
     problemStatement: "Fashion e-commerce platforms struggle with thousands of unstructured product reviews where critical product defects (such as seam issues or inconsistent sizing) get lost in generic star ratings.",
     solution: "StyleSense AI extracts structured aspect-level sentiments and applies Retrieval-Augmented Generation (RAG) on customer reviews to produce validated, cited merchant recommendations and automated trend reports.",
+    myContribution: "Engineered the RAG pipeline and aspect-level classification engine using Google Gemini API and Node.js. Built JWT authentication with RBAC, integrated PDFKit report generation, and implemented automated regression testing covering 700+ assertions.",
     challenges: [
       "Mitigating hallucination in LLM synthesis by enforcing strict retrieval grounding.",
       "Engineering aspect-specific classification for complex fashion feedback with dual sentiments in a single sentence.",
       "Maintaining high-throughput report generation using asynchronous PDFKit compilation."
     ],
-    githubUrl: "https://github.com/TheKT-Github",
+    githubUrl: "https://github.com/TheKT-Github/feedback-survey-system",
     liveUrl: null
   },
   {
@@ -174,12 +174,13 @@ export const projectsData = [
     ],
     problemStatement: "Traditional task trackers rely on static priority flags (Low/Med/High) that fail to account for looming deadlines, blocked dependencies, or developer overload.",
     solution: "Priora computes a continuous gravity score using dynamic mathematical heuristics, automatically surfacing critical-path blockers into clear visual zones.",
+    myContribution: "Architected the Dynamic Gravity Engine mathematical scoring algorithm in Spring Boot. Developed the Angular 16 Three-Zone Quantum Canvas dashboard, implemented RBAC security layer, and created comprehensive JUnit/Mockito test suites.",
     challenges: [
       "Designing an efficient priority recalculation engine that handles large dependency trees without performance degradation.",
       "Ensuring strict data consistency across Oracle SQL transactions during concurrent task reassignments.",
       "Achieving robust test coverage across all boundary conditions and permission gates."
     ],
-    githubUrl: "https://github.com/TheKT-Github",
+    githubUrl: "https://github.com/TheKT-Github/Priora",
     liveUrl: null
   },
   {
@@ -206,11 +207,13 @@ export const projectsData = [
     ],
     problemStatement: "Manual leave tracking through emails leads to approval delays, untracked absences, and missed escalation deadlines.",
     solution: "AttendFlow delivers a structured, transparent leave orchestration workflow with real-time status transitions and automated escalation.",
+    myContribution: "Built the responsive leave application UI in React.js and connected it to Python Flask REST endpoints. Designed the multi-tier approval workflow logic and form validation rules.",
     challenges: [
       "Synchronizing client state with backend validation rules for variable leave allowances.",
       "Designing clean workflow transitions between employee submission and managerial escalation."
     ],
-    githubUrl: "https://github.com/TheKT-Github",
+    githubUrl: null,
+    githubPlaceholder: "Repository URL pending publication",
     liveUrl: null
   }
 ];

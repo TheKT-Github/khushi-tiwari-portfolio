@@ -184,6 +184,27 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
+          {/* My Contribution / Engineering Role */}
+          {project.myContribution && (
+            <div
+              style={{
+                marginBottom: '1.75rem',
+                padding: '1.25rem',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'rgba(139, 92, 246, 0.06)',
+                border: '1px solid rgba(139, 92, 246, 0.25)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem', color: 'var(--text-accent)' }}>
+                <Sparkles size={17} />
+                <h5 style={{ fontSize: '0.95rem', fontWeight: 600 }}>My Contribution &amp; Architecture Role</h5>
+              </div>
+              <p style={{ fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: '1.65' }}>
+                {project.myContribution}
+              </p>
+            </div>
+          )}
+
           {/* Key Features */}
           <div style={{ marginBottom: '1.75rem' }}>
             <h4 style={{ fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
@@ -251,16 +272,34 @@ export default function ProjectModal({ project, onClose }) {
               borderTop: '1px solid var(--border-subtle)'
             }}
           >
-            {project.githubUrl && (
+            {project.githubUrl ? (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary"
+                className="btn btn-primary"
+                title="View Source Code on GitHub (Opens in new tab)"
               >
                 <Github size={18} />
-                <span>GitHub Repository</span>
+                <span>View Source Code</span>
               </a>
+            ) : (
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.65rem 1rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px dashed var(--border-light)',
+                  color: 'var(--text-muted)',
+                  fontSize: '0.88rem'
+                }}
+              >
+                <Github size={16} />
+                <span>Source Code: Repository URL pending publication</span>
+              </div>
             )}
 
             {project.liveUrl ? (
@@ -268,7 +307,7 @@ export default function ProjectModal({ project, onClose }) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn btn-secondary"
               >
                 <ExternalLink size={18} />
                 <span>Live Demonstration</span>
@@ -285,7 +324,7 @@ export default function ProjectModal({ project, onClose }) {
                 }}
               >
                 <Wrench size={15} />
-                (Repository verified; live deployment link is private / available upon request)
+                (Architecture verified; live deployment link private / available upon request)
               </span>
             )}
           </div>

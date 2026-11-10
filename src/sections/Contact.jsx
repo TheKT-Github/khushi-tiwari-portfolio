@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle2, AlertCircle, Info, MapPin, Linkedin, Github } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { Mail, Send, CheckCircle2, AlertCircle, Info, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import { personalData } from '../data/portfolioData';
 
@@ -16,10 +17,15 @@ export default function Contact() {
   const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' | 'demo_success' | 'error' | null
   const [statusMessage, setStatusMessage] = useState('');
 
-  // Check if live EmailJS / Formspree service is configured
+  // Environment variables for EmailJS
   const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
   const isEmailConfigured =
     Boolean(emailJsServiceId) &&
+    Boolean(emailJsTemplateId) &&
+    Boolean(emailJsPublicKey) &&
     emailJsServiceId !== 'your_emailjs_service_id_here' &&
     emailJsServiceId.length > 3;
 
@@ -63,42 +69,41 @@ export default function Contact() {
 
     try {
       if (isEmailConfigured) {
-        // Attempt live API delivery
-        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-            template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-            user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-            template_params: {
-              from_name: formData.name,
-              from_email: formData.email,
-              subject: formData.subject,
-              message: formData.message
-            }
-          })
-        });
+        // Live delivery via EmailJS official SDK
+        const templateParams = {
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          reply_to: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          to_email: personalData.email
+        };
 
-        if (response.ok) {
+        const result = await emailjs.send(
+          emailJsServiceId,
+          emailJsTemplateId,
+          templateParams,
+          emailJsPublicKey
+        );
+
+        if (result.status === 200 || result.text === 'OK') {
           setSubmissionStatus('success');
-          setStatusMessage('Thank you! Your message has been sent successfully to Khushi Tiwari.');
+          setStatusMessage('Thank you! Your message has been sent successfully to Khushi Tiwari. You will receive a response shortly.');
           setFormData({ name: '', email: '', subject: '', message: '' });
         } else {
-          throw new Error('EmailJS returned an error. Please contact directly via email.');
+          throw new Error('EmailJS returned status ' + result.status);
         }
       } else {
-        // Demo / Preview Mode (Never falsely claims live delivery!)
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        // Honest Preview / Demo Mode (Never falsely claims delivery!)
+        await new Promise((resolve) => setTimeout(resolve, 600));
         setSubmissionStatus('demo_success');
         setStatusMessage(
-          'Form validated successfully in Demo Mode. (Note: Email delivery service keys are not configured in environment variables. No email was dispatched to avoid false delivery claims).'
+          'Form validated successfully! Note: EmailJS API keys are currently in preview mode. To deliver an actual email right now, please use the direct email link below or configure .env.'
         );
-        setFormData({ name: '', email: '', subject: '', message: '' });
       }
     } catch (err) {
       setSubmissionStatus('error');
-      setStatusMessage('Delivery failed. Please email Khushi directly at ' + personalData.email);
+      setStatusMessage('Delivery failed (' + (err?.text || err?.message || 'Network error') + '). Please reach out directly to ' + personalData.email);
     } finally {
       setIsSubmitting(false);
     }
@@ -410,9 +415,9 @@ export default function Contact() {
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'flex-start',
+                    flexDirection: 'column',
                     gap: '0.65rem',
-                    padding: '0.85rem 1rem',
+                    padding: '0.9rem 1.1rem',
                     borderRadius: 'var(--radius-md)',
                     background: 'rgba(59, 130, 246, 0.15)',
                     border: '1px solid #3B82F6',
@@ -421,8 +426,20 @@ export default function Contact() {
                     fontSize: '0.88rem'
                   }}
                 >
-                  <Info size={18} style={{ marginTop: '0.1rem', flexShrink: 0 }} />
-                  <span>{statusMessage}</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                    <Info size={18} style={{ marginTop: '0.1rem', flexShrink: 0 }} />
+                    <span>{statusMessage}</span>
+                  </div>
+                  <div style={{ marginTop: '0.35rem' }}>
+                    <a
+                      href={`mailto:${personalData.email}?subject=${encodeURIComponent(formData.subject || 'Software Developer Opportunity')}&body=${encodeURIComponent(`Hi Khushi,\n\n${formData.message}\n\nBest regards,\n${formData.name} (${formData.email})`)}`}
+                      className="btn btn-secondary btn-sm"
+                      style={{ fontSize: '0.84rem', padding: '0.4rem 0.85rem' }}
+                    >
+                      <Mail size={14} />
+                      <span>Dispatch via Email Client (mailto)</span>
+                    </a>
+                  </div>
                 </div>
               )}
 

@@ -12,9 +12,15 @@ A modern, production-ready, dark-themed personal developer portfolio built for *
   - *Intellect Design Arena Ltd.* — Associate Consultant (Java, Spring Boot, Angular, iTurmeric, Purple Fabric, GenAI)
   - *Embrizon Technologies* — Web Development Intern (React.js, JavaScript, HTML5, CSS3)
 - **Featured Projects:**
-  - **StyleSense AI** — Fashion Feedback & Product Intelligence Platform (Node.js, Express, MongoDB, Gemini API, RAG, Chart.js, JWT, PDFKit)
-  - **Priora** — Smart Task Prioritization System (Java 17, Spring Boot, Spring Security, Angular 16, Oracle SQL, Hibernate, JUnit, Mockito)
-  - **AttendFlow** — Leave Management System (React.js, Flask, REST APIs)
+  - **StyleSense AI** — Fashion Feedback & Product Intelligence Platform
+    - Repository: [https://github.com/TheKT-Github/feedback-survey-system](https://github.com/TheKT-Github/feedback-survey-system)
+    - Tech: Node.js, Express.js, MongoDB, Google Gemini API, RAG, Chart.js, JWT, PDFKit
+  - **Priora** — Smart Task Prioritization System
+    - Repository: [https://github.com/TheKT-Github/Priora](https://github.com/TheKT-Github/Priora)
+    - Tech: Java 17, Spring Boot, Spring Security, Angular 16, Oracle SQL, Hibernate, JUnit, Mockito
+  - **AttendFlow** — Leave Management System
+    - Repository: *(Pending publication)*
+    - Tech: React.js, Flask, REST APIs
 
 ---
 
@@ -23,7 +29,7 @@ A modern, production-ready, dark-themed personal developer portfolio built for *
 - **Framework:** React 18 (Functional components & hooks)
 - **Bundler / Tooling:** Vite 5
 - **Icons:** Lucide React
-- **Animations:** Custom CSS animations + Framer Motion compatible tokens
+- **Email Service:** EmailJS Official SDK (`@emailjs/browser`)
 - **Styling:** Modular CSS variables and design tokens (zero heavy UI dependencies like Tailwind/Bootstrap)
 - **Typography:** Inter & Manrope (Google Fonts)
 
@@ -48,7 +54,7 @@ khushi-tiwari-portfolio/
 │   ├── components/
 │   │   ├── Navbar.jsx                # Sticky navigation & mobile drawer
 │   │   ├── Footer.jsx                # Footer with links & dynamic year
-│   │   ├── ProjectCard.jsx           # Cards with tags & actions
+│   │   ├── ProjectCard.jsx           # Cards with tags, code buttons & actions
 │   │   ├── ProjectModal.jsx          # Architecture & drill-down modal
 │   │   ├── SectionHeading.jsx        # Standardized section headings
 │   │   ├── SocialLinks.jsx           # GitHub, LinkedIn & Mail buttons
@@ -62,7 +68,7 @@ khushi-tiwari-portfolio/
 │   │   ├── Projects.jsx              # Featured & core projects
 │   │   ├── Education.jsx             # GLA University & KV BHU
 │   │   ├── Certifications.jsx        # Verified technical credentials
-│   │   └── Contact.jsx               # Interactive contact form & demo mode
+│   │   └── Contact.jsx               # Interactive contact form with EmailJS SDK
 │   │
 │   ├── data/
 │   │   └── portfolioData.js          # Centralized configuration file
@@ -129,26 +135,52 @@ npm run preview
 
 ---
 
-## 6. Environment Configuration (Contact Form)
+## 6. EmailJS Contact Form Setup
 
-By default, the contact form operates in a safe **Demo / Preview Mode** that validates all user input without falsely claiming an email was delivered.
+The contact form is powered by the official **EmailJS SDK (`@emailjs/browser`)**.
 
-To enable live email delivery to your inbox via **EmailJS**:
+- **Default state:** When API keys are not set, the form runs in a safe **Interactive Demo Mode**, validating input without falsely claiming an email was sent, and offers a 1-click fallback to the default email client (`mailto:khushitiwari69120@gmail.com`).
+- **Live delivery state:** Once configured with your EmailJS credentials, incoming messages are dispatched directly to your inbox (`khushitiwari69120@gmail.com`), with the sender's email configured as `reply_to`.
 
-1. Create a free account at [EmailJS](https://www.emailjs.com/).
-2. Create an Email Service (e.g., using Gmail).
-3. Create an Email Template with fields: `from_name`, `from_email`, `subject`, `message`.
-4. Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-5. Fill in your keys:
-   ```env
-   VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
-   VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
-   VITE_EMAILJS_PUBLIC_KEY=user_xxxxxxx
-   ```
-6. Restart the Vite dev server (`npm run dev`).
+### Step-by-Step Setup:
+1. **Create an account:** Register at [EmailJS](https://www.emailjs.com/) (free tier includes 200 emails/month).
+2. **Add Email Service:**
+   - Go to **Email Services** > **Add New Service**.
+   - Select **Gmail** (connect `khushitiwari69120@gmail.com`).
+   - Note your **Service ID** (e.g. `service_abc123`).
+3. **Create Email Template:**
+   - Go to **Email Templates** > **Create New Template**.
+   - Set Subject: `Portfolio Contact: {{subject}}`
+   - Content:
+     ```
+     You received a message from {{from_name}} ({{from_email}}):
+
+     Subject: {{subject}}
+
+     Message:
+     {{message}}
+     ```
+   - In Settings > **Reply To**, enter `{{reply_to}}` or `{{from_email}}`.
+   - Save and note your **Template ID** (e.g. `template_xyz789`).
+4. **Get Public Key:**
+   - Go to **Account** > **API Keys**.
+   - Note your **Public Key** (User ID).
+5. **Configure locally:**
+   - Create a `.env` file from `.env.example`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Add your keys:
+     ```env
+     VITE_EMAILJS_SERVICE_ID=service_abc123
+     VITE_EMAILJS_TEMPLATE_ID=template_xyz789
+     VITE_EMAILJS_PUBLIC_KEY=your_public_key
+     ```
+   - Restart the dev server (`npm run dev`).
+6. **Configure on Vercel (for production):**
+   - In your Vercel Project Dashboard, go to **Settings** > **Environment Variables**.
+   - Add `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, and `VITE_EMAILJS_PUBLIC_KEY`.
+   - Trigger a redeployment.
 
 ---
 

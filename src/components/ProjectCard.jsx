@@ -166,17 +166,36 @@ export default function ProjectCard({ project, onSelect }) {
             <ArrowRight size={15} />
           </button>
 
-          {project.githubUrl && (
+          {project.githubUrl ? (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn-sm"
-              aria-label={`View ${project.title} on GitHub`}
-              style={{ width: '38px', height: '36px', padding: 0 }}
+              title="View Source Code on GitHub"
+              aria-label={`View ${project.title} Source Code on GitHub`}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.45rem 0.85rem' }}
             >
-              <Github size={16} />
+              <Github size={15} />
+              <span>Code</span>
             </a>
+          ) : (
+            <span
+              className="btn btn-secondary btn-sm"
+              title="Repository URL pending publication"
+              style={{
+                opacity: 0.5,
+                cursor: 'not-allowed',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.45rem 0.85rem',
+                borderStyle: 'dashed'
+              }}
+            >
+              <Github size={15} />
+              <span>Repo Pending</span>
+            </span>
           )}
 
           {project.liveUrl && (
