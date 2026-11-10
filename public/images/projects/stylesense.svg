@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1325" />
+      <stop offset="100%" stop-color="#181F38" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" />
+
+  <!-- Grid overlay -->
+  <g stroke="rgba(255, 255, 255, 0.04)" stroke-width="1">
+    <line x1="0" y1="90" x2="800" y2="90" />
+    <line x1="0" y1="180" x2="800" y2="180" />
+    <line x1="0" y1="270" x2="800" y2="270" />
+    <line x1="0" y1="360" x2="800" y2="360" />
+    <line x1="160" y1="0" x2="160" y2="450" />
+    <line x1="320" y1="0" x2="320" y2="450" />
+    <line x1="480" y1="0" x2="480" y2="450" />
+    <line x1="640" y1="0" x2="640" y2="450" />
+  </g>
+
+  <!-- Top App Bar -->
+  <rect x="40" y="30" width="720" height="44" rx="8" fill="#131930" stroke="rgba(255,255,255,0.08)" />
+  <circle cx="65" cy="52" r="5" fill="#EF4444" />
+  <circle cx="85" cy="52" r="5" fill="#F59E0B" />
+  <circle cx="105" cy="52" r="5" fill="#10B981" />
+  <text x="400" y="58" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#94A3B8" text-anchor="middle">StyleSense AI — Intelligence &amp; Sentiment Engine</text>
+
+  <!-- Left Aspect Classification Card -->
+  <rect x="40" y="95" width="230" height="315" rx="10" fill="#11172E" stroke="rgba(139, 92, 246, 0.25)" />
+  <text x="60" y="130" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8FAFC">Aspect Sentiment</text>
+  <text x="60" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#94A3B8">Fitting, Quality &amp; Fabric</text>
+
+  <!-- Sentiment bars -->
+  <text x="60" y="190" font-family="system-ui, sans-serif" font-size="12" fill="#E2E8F0">Fitting Analysis</text>
+  <rect x="60" y="200" width="190" height="8" rx="4" fill="rgba(255,255,255,0.1)" />
+  <rect x="60" y="200" width="160" height="8" rx="4" fill="url(#purpleGrad)" />
+
+  <text x="60" y="240" font-family="system-ui, sans-serif" font-size="12" fill="#E2E8F0">Fabric Durability</text>
+  <rect x="60" y="250" width="190" height="8" rx="4" fill="rgba(255,255,255,0.1)" />
+  <rect x="60" y="250" width="175" height="8" rx="4" fill="url(#cyanGrad)" />
+
+  <text x="60" y="290" font-family="system-ui, sans-serif" font-size="12" fill="#E2E8F0">Quality Confidence</text>
+  <rect x="60" y="300" width="190" height="8" rx="4" fill="rgba(255,255,255,0.1)" />
+  <rect x="60" y="300" width="145" height="8" rx="4" fill="#3B82F6" />
+
+  <rect x="60" y="335" width="190" height="50" rx="8" fill="#1A2242" />
+  <text x="75" y="357" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#22D3EE">🛡 Spam Filter Active</text>
+  <text x="75" y="373" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8">700+ assertions passed</text>
+
+  <!-- Center RAG & Gemini Analytics Chart -->
+  <rect x="290" y="95" width="470" height="195" rx="10" fill="#11172E" stroke="rgba(255,255,255,0.08)" />
+  <text x="315" y="130" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8FAFC">RAG-Powered Feedback Insights (Gemini API)</text>
+  <text x="315" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#94A3B8">Semantic retrieval with validated review citations</text>
+
+  <!-- Wave chart -->
+  <path d="M 315 250 Q 370 170, 430 210 T 540 180 T 650 220 T 730 160" fill="none" stroke="url(#purpleGrad)" stroke-width="3" />
+  <path d="M 315 250 Q 370 170, 430 210 T 540 180 T 650 220 T 730 160 L 730 270 L 315 270 Z" fill="url(#purpleGrad)" opacity="0.12" />
+
+  <!-- Bottom Badges / Metrics -->
+  <rect x="290" y="305" width="225" height="105" rx="10" fill="#11172E" stroke="rgba(255,255,255,0.08)" />
+  <text x="310" y="335" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#8B5CF6">Automated Reports</text>
+  <text x="310" y="360" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#F8FAFC">PDF &amp; CSV Export</text>
+  <text x="310" y="385" font-family="system-ui, sans-serif" font-size="11" fill="#94A3B8">PDFKit &amp; Dynamic Generator</text>
+
+  <rect x="535" y="305" width="225" height="105" rx="10" fill="#11172E" stroke="rgba(255,255,255,0.08)" />
+  <text x="555" y="335" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#22D3EE">Security &amp; Auth</text>
+  <text x="555" y="360" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#F8FAFC">JWT + RBAC</text>
+  <text x="555" y="385" font-family="system-ui, sans-serif" font-size="11" fill="#94A3B8">Multi-tier admin protection</text>
+</svg>
