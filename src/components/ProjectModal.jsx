@@ -289,16 +289,17 @@ export default function ProjectModal({ project, onClose }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  padding: '0.65rem 1rem',
+                  padding: '0.65rem 1.1rem',
                   borderRadius: 'var(--radius-md)',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px dashed var(--border-light)',
-                  color: 'var(--text-muted)',
-                  fontSize: '0.88rem'
+                  background: 'rgba(34, 211, 238, 0.08)',
+                  border: '1px solid rgba(34, 211, 238, 0.25)',
+                  color: 'var(--accent-cyan)',
+                  fontSize: '0.88rem',
+                  fontWeight: 500
                 }}
               >
-                <Github size={16} />
-                <span>Source Code: Repository URL pending publication</span>
+                <CheckCircle2 size={16} />
+                <span>System Architecture Verified • Codebase available upon request</span>
               </div>
             )}
 

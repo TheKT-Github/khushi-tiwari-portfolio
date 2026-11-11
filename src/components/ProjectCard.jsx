@@ -160,13 +160,25 @@ export default function ProjectCard({ project, onSelect }) {
           <button
             onClick={() => onSelect(project)}
             className="btn btn-primary btn-sm"
-            style={{ flexGrow: 1 }}
+            style={{
+              flexGrow: 1,
+              width: project.githubUrl ? 'auto' : '100%',
+              background: project.githubUrl
+                ? 'var(--grad-primary)'
+                : 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #22D3EE 100%)',
+              boxShadow: project.githubUrl
+                ? '0 4px 18px rgba(139, 92, 246, 0.35)'
+                : '0 4px 22px rgba(59, 130, 246, 0.45)',
+              fontWeight: 600,
+              letterSpacing: '0.01em'
+            }}
           >
-            <span>View Architecture</span>
+            <Layers size={15} />
+            <span>{project.githubUrl ? 'View Architecture' : 'Explore System Architecture'}</span>
             <ArrowRight size={15} />
           </button>
 
-          {project.githubUrl ? (
+          {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
@@ -179,23 +191,6 @@ export default function ProjectCard({ project, onSelect }) {
               <Github size={15} />
               <span>Code</span>
             </a>
-          ) : (
-            <span
-              className="btn btn-secondary btn-sm"
-              title="Repository URL pending publication"
-              style={{
-                opacity: 0.5,
-                cursor: 'not-allowed',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                padding: '0.45rem 0.85rem',
-                borderStyle: 'dashed'
-              }}
-            >
-              <Github size={15} />
-              <span>Repo Pending</span>
-            </span>
           )}
 
           {project.liveUrl && (
