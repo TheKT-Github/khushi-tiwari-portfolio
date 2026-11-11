@@ -85,7 +85,9 @@ export default function Contact() {
 
     const trimmedData = {
       from_name: formData.name.trim(),
+      name: formData.name.trim(),
       from_email: formData.email.trim(),
+      email: formData.email.trim(),
       reply_to: formData.email.trim(),
       subject: formData.subject.trim(),
       message: formData.message.trim(),
