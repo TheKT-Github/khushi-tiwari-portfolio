@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Github, ExternalLink, CheckCircle2, AlertCircle, Wrench, Sparkles } from 'lucide-react';
 
 export default function ProjectModal({ project, onClose }) {
@@ -18,7 +19,7 @@ export default function ProjectModal({ project, onClose }) {
 
   if (!project) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -27,14 +28,15 @@ export default function ProjectModal({ project, onClose }) {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 1000,
-        backgroundColor: 'rgba(8, 11, 22, 0.85)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
+        zIndex: 99999,
+        backgroundColor: 'rgba(8, 11, 22, 0.88)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1.5rem'
+        padding: '2rem 1.25rem',
+        overflowY: 'auto'
       }}
     >
       <div
@@ -45,28 +47,27 @@ export default function ProjectModal({ project, onClose }) {
           borderRadius: 'var(--radius-xl)',
           width: '100%',
           maxWidth: '820px',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)',
-          position: 'relative'
+          maxHeight: 'min(90vh, 880px)',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
         {/* Modal Header Bar with Close Button */}
         <div
           style={{
-            position: 'sticky',
-            top: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '1.25rem 1.75rem',
-            backgroundColor: 'rgba(13, 18, 36, 0.95)',
-            backdropFilter: 'blur(10px)',
+            backgroundColor: 'rgba(13, 18, 36, 0.98)',
             borderBottom: '1px solid var(--border-subtle)',
-            zIndex: 10
+            flexShrink: 0
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             <span className="badge-pill badge-cyan">{project.badge}</span>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Project Architecture &amp; Details</span>
           </div>
@@ -101,8 +102,8 @@ export default function ProjectModal({ project, onClose }) {
           </button>
         </div>
 
-        {/* Modal Content */}
-        <div style={{ padding: '1.75rem 2rem 2.5rem' }}>
+        {/* Modal Content - Scrollable Body */}
+        <div style={{ padding: '1.75rem 2rem 2.5rem', overflowY: 'auto', flex: '1 1 auto' }}>
           {/* Project Preview Banner */}
           <div
             style={{
@@ -301,6 +302,7 @@ export default function ProjectModal({ project, onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
