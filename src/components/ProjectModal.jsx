@@ -261,74 +261,44 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Action Links */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: '1rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid var(--border-subtle)'
-            }}
-          >
-            {project.githubUrl ? (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-                title="View Source Code on GitHub (Opens in new tab)"
-              >
-                <Github size={18} />
-                <span>View Source Code</span>
-              </a>
-            ) : (
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.65rem 1.1rem',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'rgba(34, 211, 238, 0.08)',
-                  border: '1px solid rgba(34, 211, 238, 0.25)',
-                  color: 'var(--accent-cyan)',
-                  fontSize: '0.88rem',
-                  fontWeight: 500
-                }}
-              >
-                <CheckCircle2 size={16} />
-                <span>System Architecture Verified • Codebase available upon request</span>
-              </div>
-            )}
+          {/* Action Links (rendered only if real repository or live URL exists) */}
+          {(project.githubUrl || project.liveUrl) && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                paddingTop: '1.5rem',
+                borderTop: '1px solid var(--border-subtle)'
+              }}
+            >
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  title="View Source Code on GitHub (Opens in new tab)"
+                >
+                  <Github size={18} />
+                  <span>View Source Code</span>
+                </a>
+              )}
 
-            {project.liveUrl ? (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-              >
-                <ExternalLink size={18} />
-                <span>Live Demonstration</span>
-              </a>
-            ) : (
-              <span
-                style={{
-                  fontSize: '0.85rem',
-                  color: 'var(--text-muted)',
-                  fontStyle: 'italic',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem'
-                }}
-              >
-                <Wrench size={15} />
-                (Architecture verified; live deployment link private / available upon request)
-              </span>
-            )}
-          </div>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  <ExternalLink size={18} />
+                  <span>Live Demonstration</span>
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
