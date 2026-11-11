@@ -13,7 +13,7 @@ export const personalData = {
   github: "https://github.com/TheKT-Github",
   linkedin: "https://linkedin.com/in/khushi-tiwari-908505280",
   resumePath: "/resume.pdf",
-  profilePhoto: "/images/profile-placeholder.svg",
+  profilePhoto: "/images/profile.jpg",
   availableForWork: true
 };
 
