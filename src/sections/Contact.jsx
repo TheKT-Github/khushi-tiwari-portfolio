@@ -12,6 +12,7 @@ export default function Contact() {
     message: ''
   });
 
+  const [honeypot, setHoneypot] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' | 'demo_success' | 'error' | null
@@ -26,26 +27,34 @@ export default function Contact() {
     Boolean(emailJsServiceId) &&
     Boolean(emailJsTemplateId) &&
     Boolean(emailJsPublicKey) &&
+    emailJsServiceId.trim() !== '' &&
     emailJsServiceId !== 'your_emailjs_service_id_here' &&
     emailJsServiceId.length > 3;
 
   const validate = () => {
     const errs = {};
-    if (!formData.name.trim()) {
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedSubject = formData.subject.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName) {
       errs.name = 'Full name is required.';
     }
-    if (!formData.email.trim()) {
+    if (!trimmedEmail) {
       errs.email = 'Email address is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       errs.email = 'Please provide a valid email address.';
     }
-    if (!formData.subject.trim()) {
+    if (!trimmedSubject) {
       errs.subject = 'Subject is required.';
     }
-    if (!formData.message.trim()) {
+    if (!trimmedMessage) {
       errs.message = 'Message content is required.';
-    } else if (formData.message.trim().length < 10) {
+    } else if (trimmedMessage.length < 10) {
       errs.message = 'Please provide a message with at least 10 characters.';
+    } else if (trimmedMessage.length > 3000) {
+      errs.message = 'Message must be under 3000 characters.';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -61,28 +70,35 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return; // Prevent duplicate submissions
+
+    // Silently reject bot/spam submissions without triggering API
+    if (honeypot) {
+      return;
+    }
+
     if (!validate()) return;
 
     setIsSubmitting(true);
     setSubmissionStatus(null);
     setStatusMessage('');
 
+    const trimmedData = {
+      from_name: formData.name.trim(),
+      from_email: formData.email.trim(),
+      reply_to: formData.email.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+      to_email: personalData.email
+    };
+
     try {
       if (isEmailConfigured) {
         // Live delivery via EmailJS official SDK
-        const templateParams = {
-          from_name: formData.name.trim(),
-          from_email: formData.email.trim(),
-          reply_to: formData.email.trim(),
-          subject: formData.subject.trim(),
-          message: formData.message.trim(),
-          to_email: personalData.email
-        };
-
         const result = await emailjs.send(
           emailJsServiceId,
           emailJsTemplateId,
-          templateParams,
+          trimmedData,
           emailJsPublicKey
         );
 
@@ -103,7 +119,7 @@ export default function Contact() {
       }
     } catch (err) {
       setSubmissionStatus('error');
-      setStatusMessage('Delivery failed (' + (err?.text || err?.message || 'Network error') + '). Please reach out directly to ' + personalData.email);
+      setStatusMessage('Delivery failed (' + (err?.text || err?.message || 'Network error') + '). Please retry or reach out directly to ' + personalData.email);
     } finally {
       setIsSubmitting(false);
     }
@@ -269,6 +285,18 @@ export default function Contact() {
             )}
 
             <form onSubmit={handleSubmit} noValidate>
+              {/* Invisible Honeypot Field for Spam Protection */}
+              <div style={{ display: 'none', position: 'absolute', left: '-9999px' }} aria-hidden="true">
+                <input
+                  type="text"
+                  name="bot_field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
               {/* Full Name */}
               <div style={{ marginBottom: '1.25rem' }}>
                 <label
@@ -471,7 +499,7 @@ export default function Contact() {
                 style={{ width: '100%', padding: '0.85rem' }}
               >
                 {isSubmitting ? (
-                  <span>Processing...</span>
+                  <span>Sending Message...</span>
                 ) : (
                   <>
                     <Send size={16} />
