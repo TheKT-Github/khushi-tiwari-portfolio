@@ -96,7 +96,9 @@ export default function Certifications() {
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <CheckCircle size={15} color="var(--accent-cyan)" />
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Verified Technical Credential</span>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    {cert.certificateUrl ? 'Verified Technical Credential' : 'Project Achievement & Recognition'}
+                  </span>
                 </div>
               </div>
             </div>

@@ -255,16 +255,16 @@ export const certificationsData = [
     certificateUrl: "https://drive.google.com/file/d/14-orNGcTve0sEnxXDr81m4Soe01cUdrK/view?usp=sharing"
   },
   {
-    title: "Terraform Infrastructure Project Recognition",
-    category: "Infrastructure as Code",
-    description: "Recognized for developing a Terraform-based cloud infrastructure project.",
-    certificateUrl: null
-  },
-  {
     title: "Web Development Certification",
     category: "Frontend",
     description: "Frontend development using modern web technologies.",
     certificateUrl: "https://drive.google.com/file/d/1PfONepI5L3ZAODXO_NRMU5PYNbw75HKP/view?usp=sharing"
+  },
+  {
+    title: "Terraform Infrastructure Project Recognition",
+    category: "Infrastructure as Code",
+    description: "Recognized for developing a Terraform-based cloud infrastructure project.",
+    certificateUrl: null
   }
 ];
 
