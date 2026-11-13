@@ -9,6 +9,8 @@ export const personalData = {
   title: "Aspiring Software Developer | Full Stack Developer",
   tagline: "I enjoy building meaningful digital experiences and developing practical software solutions.",
   email: "khushitiwari69120@gmail.com",
+  phone: "8957756901",
+  phoneDisplay: "+91 8957756901",
   location: "India",
   github: "https://github.com/TheKT-Github",
   linkedin: "https://linkedin.com/in/khushi-tiwari-908505280",
@@ -259,6 +261,12 @@ export const certificationsData = [
     category: "Frontend",
     description: "Frontend development using modern web technologies.",
     certificateUrl: "https://drive.google.com/file/d/1PfONepI5L3ZAODXO_NRMU5PYNbw75HKP/view?usp=sharing"
+  },
+  {
+    title: "Naukri Campus Young Turks 2026 – Certificate of Merit",
+    category: "National Assessment",
+    description: "Scored in the 97.84 percentile in Naukri Campus Young Turks 2026, presented by HCLTech.",
+    certificateUrl: "https://drive.google.com/file/d/1OBRXcHeQThtYaaoJJP09Y7L8kf_EfJ8j/view?usp=sharing"
   },
   {
     title: "Terraform Infrastructure Project Recognition",

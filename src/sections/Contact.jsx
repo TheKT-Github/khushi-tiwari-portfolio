@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, Send, CheckCircle2, AlertCircle, Info, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, AlertCircle, Info, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import { personalData } from '../data/portfolioData';
 
@@ -188,6 +188,34 @@ export default function Contact() {
                   <div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Email</div>
                     <div style={{ fontSize: '0.92rem', color: '#FFFFFF', fontWeight: 500 }}>{personalData.email}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={`tel:${personalData.phone || '8957756901'}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    padding: '0.85rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid var(--border-subtle)',
+                    transition: 'all var(--transition-fast)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#10B981';
+                    e.currentTarget.style.background = 'rgba(16, 185, 129, 0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                  }}
+                >
+                  <Phone size={20} color="#10B981" />
+                  <div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Phone</div>
+                    <div style={{ fontSize: '0.92rem', color: '#FFFFFF', fontWeight: 500 }}>{personalData.phoneDisplay || personalData.phone || '8957756901'}</div>
                   </div>
                 </a>
 
