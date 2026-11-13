@@ -239,29 +239,35 @@ export const certificationsData = [
   {
     title: "Purple Fabric Certification",
     category: "AI & Agents",
-    description: "Agentic AI and multi-agent workflow development."
+    description: "Agentic AI and multi-agent workflow development.",
+    certificateUrl: "https://drive.google.com/file/d/10YKxUbaNNUdVI9_Ztfcto4Ycyc7pQ7Vt/view?usp=sharing"
   },
   {
     title: "iTurmeric Certification",
     category: "Enterprise Low-Code",
-    description: "Low-code application development and workflow orchestration."
+    description: "Low-code application development and workflow orchestration.",
+    certificateUrl: "https://drive.google.com/file/d/1UVyh3GUENCVlZgT2sG1-IX1UC4wCyO6-/view?usp=sharing"
   },
   {
     title: "DevOps & Cloud Computing",
     category: "Cloud & CI/CD",
-    description: "Completed training in cloud infrastructure and DevOps practices."
+    description: "Completed training in cloud infrastructure and DevOps practices.",
+    certificateUrl: "https://drive.google.com/file/d/14-orNGcTve0sEnxXDr81m4Soe01cUdrK/view?usp=sharing"
   },
   {
     title: "Terraform Infrastructure Project Recognition",
     category: "Infrastructure as Code",
-    description: "Recognized for developing a Terraform-based cloud infrastructure project."
+    description: "Recognized for developing a Terraform-based cloud infrastructure project.",
+    certificateUrl: null
   },
   {
     title: "Web Development Certification",
     category: "Frontend",
-    description: "Frontend development using modern web technologies."
+    description: "Frontend development using modern web technologies.",
+    certificateUrl: "https://drive.google.com/file/d/1PfONepI5L3ZAODXO_NRMU5PYNbw75HKP/view?usp=sharing"
   }
 ];
+
 
 export const navLinks = [
   { name: "Home", href: "#hero" },

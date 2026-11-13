@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Award, CheckCircle, ShieldCheck, ExternalLink } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import { certificationsData } from '../data/portfolioData';
 
@@ -9,7 +9,7 @@ export default function Certifications() {
       <div className="container">
         <SectionHeading
           tag="Credentials"
-          title="Certifications &amp;"
+          title="Certifications &"
           highlight="Achievements"
           subtitle="Verified technical credentials in Agentic AI, low-code platforms, DevOps, cloud infrastructure, and web engineering."
         />
@@ -60,9 +60,44 @@ export default function Certifications() {
                 </p>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
-                <CheckCircle size={15} color="var(--accent-cyan)" />
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Verified Technical Credential</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
+                {cert.certificateUrl && (
+                  <a
+                    href={cert.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      color: 'var(--accent-cyan)',
+                      textDecoration: 'none',
+                      padding: '0.5rem 0.9rem',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid rgba(34, 211, 238, 0.3)',
+                      background: 'rgba(34, 211, 238, 0.07)',
+                      transition: 'all var(--transition-fast)',
+                      alignSelf: 'flex-start'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(34, 211, 238, 0.15)';
+                      e.currentTarget.style.borderColor = 'rgba(34, 211, 238, 0.6)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(34, 211, 238, 0.07)';
+                      e.currentTarget.style.borderColor = 'rgba(34, 211, 238, 0.3)';
+                    }}
+                  >
+                    <ExternalLink size={14} />
+                    View Certificate
+                  </a>
+                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <CheckCircle size={15} color="var(--accent-cyan)" />
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Verified Technical Credential</span>
+                </div>
               </div>
             </div>
           ))}
@@ -71,3 +106,4 @@ export default function Certifications() {
     </section>
   );
 }
+
